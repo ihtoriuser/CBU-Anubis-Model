@@ -1,8 +1,5 @@
 # 🎯 CBU Coding Challenge 2025: AON Team Final Submission
 
-
-_Image generated using AI for visualization_
-
 ## 🚀 Our Philosophy: All or Nothing
 
 Welcome to the final submission repository for **Team AON (All or Nothing)**. Our goal was to deliver a state-of-the-art credit default prediction model that is not just statistically powerful, but also robust, interpretable, and commercially viable.
