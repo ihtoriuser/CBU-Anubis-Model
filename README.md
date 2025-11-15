@@ -4,7 +4,7 @@
 
 Welcome to the final submission repository for **Team AON (All or Nothing)**. Our goal was to deliver a state-of-the-art credit default prediction model that is not just statistically powerful, but also robust, interpretable, and commercially viable.
 
-We successfully moved beyond the common AUC plateau of ~80% by implementing a sophisticated, multi-layered strategy focusing on **intelligent feature engineering** and a **powerful stacking ensemble**. This is our "All" — a complete, end-to-end solution.
+We successfully moved beyond the common AUC plateau of ~80+% by implementing a sophisticated, multi-layered strategy focusing on **intelligent feature engineering** and a **powerful stacking ensemble**. 
 
 ---
 
@@ -15,14 +15,14 @@ Our workflow was designed to systematically extract maximum predictive power fro
 ### 1. **Deep EDA & Data Cleansing** `(Completed)`
 - **"Garbage In, Garbage Out" is Not an Option:** We began by developing a robust automated pipeline to unify, clean, and standardize a diverse set of raw data files. We meticulously "defused" numerous data quality traps, such as inconsistent categorical values and malformed numeric fields.
 - **IV-Driven Feature Selection:** Using the industry-standard **Information Value (IV)** metric, we evaluated every single feature. This allowed us to create a powerful baseline dataset (`alldata.csv`) by selecting only the features with proven predictive strength.
-- **Notebook:** [`notebooks/1_EDA_AON.ipynb`](notebooks/1_EDA_AON.ipynb)
+- **Notebook:** [`notebooks/EDA_AON.ipynb`](notebooks/EDA_AON.ipynb)
 
 ### 2. **"Golden Feature" Engineering** `(In progress)`
 - **Beyond the Obvious:** To break the AUC barrier, we engineered a new set of "Golden Features" designed to capture complex, non-linear relationships that a model cannot find on its own. Highlights include:
   - **Advanced Financial Ratios:** Such as `income_to_loan_ratio` and `debt_to_credit_limit_ratio`.
   - **Behavioral & Demographic Proxies:** Like `age_to_credit_history_ratio` to model financial maturity.
   - **Unsupervised Learning:** We used **KMeans clustering** to create a powerful `customer_segment` feature, identifying natural client archetypes.
-- **Notebook:** [`notebooks/2_Feature_Engineering_AON.ipynb`](notebooks/2_Feature_Engineering_AON.ipynb)
+- **Notebook:** [`notebooks/Feature_Engineering_AON.ipynb`](notebooks/Feature_Engineering_AON.ipynb)
 
 ### 3. **OOF Stacking Ensemble & Interpretation** `(In progress)`
 - **The Power of Synergy:** Our final model is not a single algorithm, but a powerful **Out-of-Fold (OOF) Stacking Ensemble**. This architecture combines the strengths of multiple top-tier models to achieve superior performance.
@@ -31,7 +31,7 @@ Our workflow was designed to systematically extract maximum predictive power fro
 - **Full Interpretability:** We believe a powerful model must also be transparent. Our solution is fully interpretable:
   - **Global Importance:** We analyze the feature importances across all base models to identify the key business drivers of risk.
   - **Local Explanations (SHAP):** Using SHAP on our meta-model, we can explain **every single prediction** by showing how much each base model contributed to the final decision.
-- **Notebook:** [`notebooks/3_Model_AON.ipynb`](notebooks/3_Model_AON.ipynb)
+- **Notebook:** [`notebooks/Model_AON.ipynb`](notebooks/Model_AON.ipynb)
 
 ---
 
