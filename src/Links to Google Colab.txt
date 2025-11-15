@@ -1,0 +1,7 @@
+Model -https://colab.research.google.com/drive/1TBNXXJ0wUMs2tXhMMqqgies49k6_tXCC#scrollTo=-cM9Wpzyl8g4
+
+Feature Engineering - https://colab.research.google.com/drive/1fSJ1fIUQtGDqbl2HwBi-nBYzggd3TYcH#scrollTo=Qhdu_Kvc_pCz
+
+EDA - https://colab.research.google.com/drive/1DOnhowHiFm3Lr58-f8x9PNzxRJTpUBK9#scrollTo=ORklqQJL1qe9
+
+javdatumarov@gmail.com
