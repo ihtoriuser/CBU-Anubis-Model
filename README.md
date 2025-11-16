@@ -2,63 +2,65 @@
 
 ## 🚀 Our Philosophy: All or Nothing
 
-Welcome to the final submission repository for **Team AON (All or Nothing)**. Our goal was to deliver a state-of-the-art credit default prediction model that is not just statistically powerful, but also robust, interpretable, and commercially viable.
+Welcome to the final submission repository for **Team AON (All or Nothing)**. Our approach to this challenge was rooted in a deep, manual analysis and a step-by-step data processing methodology. We believe that the true predictive power of a model is born not from algorithmic complexity, but from meticulous attention to data quality.
 
-We successfully moved beyond the common AUC plateau of ~80+% by implementing a sophisticated, multi-layered strategy focusing on **intelligent feature engineering** and a **powerful stacking ensemble**. 
+Every line of code, every new feature, and every modeling decision was made and implemented by our team without the use of AI-based assistants.
 
 ---
 
-## 📈 Our Winning Strategy: A Multi-Layered Approach
+---
 
-Our workflow was designed to systematically extract maximum predictive power from the data, culminating in a high-performance stacking ensemble.
+## 📈 Our Methodology: A Step-by-Step, Expert-Driven Approach
 
-### 1. **Deep EDA & Data Cleansing** `(Completed)`
-- **"Garbage In, Garbage Out" is Not an Option:** We began by developing a robust automated pipeline to unify, clean, and standardize a diverse set of raw data files. We meticulously "defused" numerous data quality traps, such as inconsistent categorical values and malformed numeric fields.
-- **IV-Driven Feature Selection:** Using the industry-standard **Information Value (IV)** metric, we evaluated every single feature. This allowed us to create a powerful baseline dataset (`alldata.csv`) by selecting only the features with proven predictive strength.
-- **Notebook:** [`notebooks/EDA_AON.ipynb`](notebooks/EDA_AON.ipynb)
+We consciously moved away from fully automated pipelines in favor of a deliberate, step-by-step process. This granted us complete control over data quality at every stage.
 
-### 2. **"Golden Feature" Engineering** `(In progress)`
-- **Beyond the Obvious:** To break the AUC barrier, we engineered a new set of "Golden Features" designed to capture complex, non-linear relationships that a model cannot find on its own. Highlights include:
-  - **Advanced Financial Ratios:** Such as `income_to_loan_ratio` and `debt_to_credit_limit_ratio`.
-  - **Behavioral & Demographic Proxies:** Like `age_to_credit_history_ratio` to model financial maturity.
-  - **Unsupervised Learning:** We used **KMeans clustering** to create a powerful `customer_segment` feature, identifying natural client archetypes.
-- **Notebook:** [`notebooks/Feature_Engineering_AON.ipynb`](notebooks/Feature_Engineering_AON.ipynb)
+### 1. **Data Consolidation & Deep Cleaning**
+- **Objective:** To build a single, unified dataset from 6 heterogeneous sources (`.csv`, `.xlsx`, `.parquet`, `.xml`, `.jsonl`) and to defuse all data "landmines".
+- **Process:**
+  - **Merging:** All data sources were carefully merged into a single comprehensive table.
+  - **"Dirty" Field Sanitization:** We manually standardized numerical columns by removing currency symbols and separators (e.g., in `annual_income`, `loan_amount`).
+  - **Categorical Standardization:** Inconsistent values, such as `Full-time`, `Fulltime`, and `FT` in the `employment_type` field, were unified into clean, consistent categories.
 
-### 3. **OOF Stacking Ensemble & Interpretation** `(In progress)`
-- **The Power of Synergy:** Our final model is not a single algorithm, but a powerful **Out-of-Fold (OOF) Stacking Ensemble**. This architecture combines the strengths of multiple top-tier models to achieve superior performance.
-  - **Level 0 Models:** `LightGBM`, `XGBoost`, and `CatBoost` run in parallel, each learning different facets of the data.
-  - **Level 1 Meta-Model:** A `LogisticRegression` model intelligently learns to weigh the predictions from the base models to produce a highly accurate and robust final prediction.
-- **Full Interpretability:** We believe a powerful model must also be transparent. Our solution is fully interpretable:
-  - **Global Importance:** We analyze the feature importances across all base models to identify the key business drivers of risk.
-  - **Local Explanations (SHAP):** Using SHAP on our meta-model, we can explain **every single prediction** by showing how much each base model contributed to the final decision.
-- **Notebook:** [`notebooks/Model_AON.ipynb`](notebooks/Model_AON.ipynb)
+### 2. **Expert-Led Feature Engineering & Selection**
+- **Objective:** To create features with maximum business relevance and to eliminate noise.
+- **Process:**
+  - **Logarithmic Transformation:** We applied a log transform to key financial indicators to normalize their distributions.
+  - **Interaction Feature Creation:** New features were generated by combining key variables (e.g., `credit_score` + `marital_status`).
+  - **Outlier Capping:** Extreme values in several features were capped at the 85th percentile to reduce their skewing effect.
+  - **Binning:** Continuous variables like `interest_rate` were discretized into bins to better capture non-linear relationships.
+  - **Manual Target Encoding:** We engineered `problem_education` and `problem_maritial` features, which encode the mean default rate for each category, directly infusing target information into the model.
+
+### 3. **Modeling: CatBoost + PCA**
+- **Objective:** To build the final, most accurate predictive model.
+- **Process:**
+  - **Model Comparison:** During the cross-validation phase, we benchmarked `Logistic Regression`, `Random Forest`, and `CatBoost`. **CatBoost** delivered the best performance **(AUC 0.8297)** and was selected as our champion model.
+  - **Dimensionality Reduction (PCA):** Before training the final model, we applied Principal Component Analysis (PCA) to reduce noise and dimensionality, transforming the feature set into 59 orthogonal, high-information components.
+  - **Final Training:** The `CatBoost` model was trained on the PCA-transformed data.
+
+---
+
+## 📊 Final Results
+
+Our meticulous, step-by-step approach and the use of a powerful PCA + CatBoost combination enabled us to achieve the following results:
+
+- **Cross-Validation AUC (Model Selection): 0.8297**
+- **Final AUC on the Full Training Set: 0.8827**
+- **F1-Score on the Full Training Set: 0.4010**
+
+These metrics demonstrate the high predictive capability of our final model.
 
 ---
 
 ## 🛠️ Technology Stack
 
-- **Core Libraries:** `Python`, `Pandas`, `NumPy`, `Scikit-learn`
-- **Advanced Modeling:** `XGBoost`, `LightGBM`, `CatBoost`
-- **Interpretability:** `SHAP`
-- **Collaboration & Reproducibility:** `Google Colab`, `Git & GitHub`
-- **AI Development Assistant:** `Gemini 2.5 Pro`
-
----
-
-## 🤖 AI-Assisted Development
-
-To accelerate our development process, enhance code quality, and explore advanced methodologies, we utilized the **Gemini 2.5 Pro** large language model as a collaborative tool. The AI's role included:
-
-- **Code Generation & Refactoring:** Assisting in writing boilerplate code for data loading, cleaning pipelines, and model training loops.
-- **Debugging:** Helping to identify and resolve errors in complex code blocks.
-- **Strategic Brainstorming:** Providing insights and alternative approaches for feature engineering and model architecture, such as implementing the OOF stacking ensemble.
-
-**Accountability:** All final architectural decisions, business logic, and code implementations were reviewed, validated, and ultimately directed by the human members of Team AON. We used AI as a powerful pair-programmer, not as a replacement for our own expertise.
+- **Core:** `Python`, `Pandas`, `NumPy`, `Scikit-learn`
+- **Modeling:** `CatBoost`, `Logistic Regression`, `Random Forest`
+- **Key Techniques:** `PCA (Principal Component Analysis)`, `One-Hot Encoding`
 
 ---
 
 ## 🤝 Team AON
 
-We are a dedicated team of data scientists who thrive on solving complex, real-world challenges. This project showcases our commitment to rigorous methodology, advanced techniques, and delivering results that are not only accurate but also understandable and actionable.
+We are Team AON. Our approach proves that a deep understanding of the data, combined with expert-driven manual processing, is the key to building world-class predictive models.
 
 **All or Nothing.**
